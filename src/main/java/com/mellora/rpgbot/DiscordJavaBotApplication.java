@@ -8,8 +8,10 @@ import com.mellora.rpgbot.bot.Bot;
 
 @SpringBootApplication
 public class DiscordJavaBotApplication {
+	
 	@Autowired
 	Bot bot;
+
 	public static void main(String[] args) {
 		SpringApplication.run(DiscordJavaBotApplication.class, args);
 	}

@@ -40,7 +40,7 @@ public class CommandManager {
 	}
 	
 	void handle(GuildMessageReceivedEvent event) {
-		String[] split = event.getMessage().getContentRaw().replaceFirst("(?i)" + Pattern.quote("!!"), "").split("\\s+");
+		String[] split = event.getMessage().getContentRaw().replaceFirst("(?i)" + Pattern.quote(Config.get("default_prefix")), "").split("\\s+");
 		String invoke = split[0].toLowerCase();
 		ICommand cmd = this.getCommand(invoke);
 		if(cmd != null) {
