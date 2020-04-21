@@ -41,17 +41,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>net.dv8tion</groupId>
-			<artifactId>JDA</artifactId>
-			<version>4.1.1_131</version>
-		</dependency>
-		<dependency>
-			<groupId>me.duncte123</groupId>
-			<artifactId>botCommons</artifactId>
-			<version>1.0.78</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
@@ -69,6 +58,17 @@
 			<artifactId>lombok</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>net.dv8tion</groupId>
+			<artifactId>JDA</artifactId>
+			<version>4.1.1_131</version>
+		</dependency>
+		<dependency>
+			<groupId>me.duncte123</groupId>
+			<artifactId>botCommons</artifactId>
+			<version>1.0.78</version>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
@@ -76,6 +76,10 @@
 			<version>1.1.1</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 	</dependencies>
 
 	<repositories>
