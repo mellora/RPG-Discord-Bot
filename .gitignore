@@ -35,6 +35,9 @@ build/
 *.json
 
 
+### SQL ###
+*.sql
+
 # Created by https://www.gitignore.io/api/git,java,maven
 # Edit at https://www.gitignore.io/?templates=git,java,maven
 
