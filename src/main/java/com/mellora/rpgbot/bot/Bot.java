@@ -19,6 +19,6 @@ public class Bot {
 		String token = Config.get("token");
 
 		// Initializes the Bot using the token provided.
-		JDABuilder.createDefault(token).setActivity(Activity.playing("With Your Lives")).build();
+		JDABuilder.createDefault(token).addEventListeners(new Listener()).setActivity(Activity.playing("With Your Lives")).build();
 	}
 }
