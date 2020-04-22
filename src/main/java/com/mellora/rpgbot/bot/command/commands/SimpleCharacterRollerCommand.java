@@ -1,18 +1,31 @@
 package com.mellora.rpgbot.bot.command.commands;
 
+import java.awt.Color;
+
 import com.mellora.rpgbot.Config;
 import com.mellora.rpgbot.bot.command.CommandContext;
 import com.mellora.rpgbot.bot.command.ICommand;
-import com.mellora.rpgbot.bot.service.DiceRoller;
+import com.mellora.rpgbot.bot.service.CharacterRoller;
 
-public class SimpleCharacterRollerCommand implements ICommand{
+import net.dv8tion.jda.api.EmbedBuilder;
 
-	DiceRoller roller;
-	
+public class SimpleCharacterRollerCommand implements ICommand {
+
+	CharacterRoller characterRoll;
+	EmbedBuilder eb;
+
 	@Override
 	public void handle(CommandContext ctx) {
-		roller = new DiceRoller();
-		ctx.getChannel().sendMessageFormat("Score 1: %d", roller.rollD4()).queue();
+		characterRoll = new CharacterRoller();
+		eb = new EmbedBuilder();
+
+		eb.setTitle("Character Scores for " + ctx.getAuthor().getName());
+
+		eb.setColor(Color.PINK);
+
+		eb.setDescription(characterRoll.simpleCharacter().toString());
+
+		ctx.getChannel().sendMessage(eb.build()).queue();
 	}
 
 	@Override
@@ -24,7 +37,8 @@ public class SimpleCharacterRollerCommand implements ICommand{
 	@Override
 	public String getHelp() {
 		// TODO Auto-generated method stub
-		return "Rolls  up 6 dice scores of 4 4-sided dice each\nUsage: " + Config.get("default_prefix") + this.getName();
+		return "Rolls  up 6 dice scores of 4 4-sided dice each\nUsage: " + Config.get("default_prefix")
+				+ this.getName();
 	}
 
 }
