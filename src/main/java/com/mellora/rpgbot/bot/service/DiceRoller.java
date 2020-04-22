@@ -4,10 +4,10 @@ import java.util.Random;
 
 public class DiceRoller {
 
-	Random random = new Random();
+	Random random;
 
 	public DiceRoller() {
-
+		random = new Random();
 	}
 
 	public int rollD4() {
