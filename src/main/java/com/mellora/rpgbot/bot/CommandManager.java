@@ -10,6 +10,7 @@ import javax.annotation.Nullable;
 import com.mellora.rpgbot.Config;
 import com.mellora.rpgbot.bot.command.CommandContext;
 import com.mellora.rpgbot.bot.command.ICommand;
+import com.mellora.rpgbot.bot.command.commands.SimpleCharacterRollerCommand;
 import com.mellora.rpgbot.bot.command.commands.HelpCommand;
 
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -20,6 +21,7 @@ public class CommandManager {
 
 	public CommandManager() {
 		addCommand(new HelpCommand(this));
+		addCommand(new SimpleCharacterRollerCommand());
 	}
 
 	private void addCommand(ICommand cmd) {
