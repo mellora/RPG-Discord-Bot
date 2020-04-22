@@ -1,6 +1,7 @@
 package com.mellora.rpgbot.bot.command.commands;
 
 import java.awt.Color;
+import java.util.List;
 
 import com.mellora.rpgbot.Config;
 import com.mellora.rpgbot.bot.command.CommandContext;
@@ -19,11 +20,15 @@ public class SimpleCharacterRollerCommand implements ICommand {
 		characterRoll = new CharacterRoller();
 		eb = new EmbedBuilder();
 
+		List<Integer> rolls = characterRoll.simpleCharacter();
+
 		eb.setTitle("Character Scores for " + ctx.getAuthor().getName());
 
 		eb.setColor(Color.PINK);
 
-		eb.setDescription(characterRoll.simpleCharacter().toString());
+		for (int x = 1; x <= rolls.size(); x++) {
+			eb.addField("Score " + x + ": ", rolls.get(x - 1).toString(), true);
+		}
 
 		ctx.getChannel().sendMessage(eb.build()).queue();
 	}
