@@ -29,6 +29,9 @@ public class CharacterRoller {
 		List<Integer> list = new ArrayList<>();
 		for (int x = 0; x < 6; x++) {
 			List<Integer> temp = multiDiceRoller.rollD6(4);
+			while (temp.contains(1)) {
+				Collections.replaceAll(temp, 1, multiDiceRoller.roller.rollD6());
+			}
 			Collections.sort(temp);
 			temp.remove(0);
 			list.add(temp.stream().mapToInt(Integer::intValue).sum());
