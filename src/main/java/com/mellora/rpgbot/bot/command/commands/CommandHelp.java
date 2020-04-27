@@ -9,11 +9,11 @@ import com.mellora.rpgbot.bot.command.ICommand;
 
 import net.dv8tion.jda.api.entities.TextChannel;
 
-public class HelpCommand implements ICommand{
+public class CommandHelp implements ICommand{
 
 	private final CommandManager manager;
 	
-	public HelpCommand(CommandManager manager) {
+	public CommandHelp(CommandManager manager) {
 		this.manager = manager;
 	}
 	

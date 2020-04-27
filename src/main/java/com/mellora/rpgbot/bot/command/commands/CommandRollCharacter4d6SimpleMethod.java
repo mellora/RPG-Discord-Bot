@@ -10,7 +10,7 @@ import com.mellora.rpgbot.bot.service.CharacterRoller;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 
-public class SimpleCharacterRollerCommand implements ICommand {
+public class CommandRollCharacter4d6SimpleMethod implements ICommand {
 
 	CharacterRoller characterRoll;
 	EmbedBuilder eb;
@@ -20,7 +20,7 @@ public class SimpleCharacterRollerCommand implements ICommand {
 		characterRoll = new CharacterRoller();
 		eb = new EmbedBuilder();
 
-		List<Integer> rolls = characterRoll.simpleCharacter();
+		List<Integer> rolls = characterRoll.roll4d6DropLowestDieForScores();
 
 		eb.setTitle("Character Scores for " + ctx.getAuthor().getName());
 
@@ -35,15 +35,13 @@ public class SimpleCharacterRollerCommand implements ICommand {
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return "simple-c";
+		return "rollCharacter-4d6-simple";
 	}
 
 	@Override
 	public String getHelp() {
-		// TODO Auto-generated method stub
-		return "Rolls  up 6 dice scores of 4 4-sided dice each\nUsage: " + Config.get("default_prefix")
-				+ this.getName();
+		return "Rolls  up 6 dice scores of 4 6-sided dice dropping the lowest die role for each\nUsage: "
+				+ Config.get("default_prefix") + this.getName();
 	}
 
 }
