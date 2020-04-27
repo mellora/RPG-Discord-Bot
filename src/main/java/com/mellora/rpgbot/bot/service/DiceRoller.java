@@ -10,6 +10,10 @@ public class DiceRoller {
 		random = new Random();
 	}
 
+	public void newRandomSeed() {
+		random.setSeed(System.currentTimeMillis());
+	}
+
 	public int rollD4() {
 		return random.nextInt(4) + 1;
 	}
