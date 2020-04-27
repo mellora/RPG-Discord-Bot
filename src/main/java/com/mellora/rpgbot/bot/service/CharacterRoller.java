@@ -14,9 +14,20 @@ public class CharacterRoller {
 		dieRoller = new DiceRoller();
 	}
 
-	public List<Integer> simpleCharacter() {
+	public List<Integer> roll4d6DropLowestDieForScores() {
 		List<Integer> list = new ArrayList<>();
-		for(int x = 0; x < 6; x++) {
+		for (int x = 0; x < 6; x++) {
+			List<Integer> temp = multiDiceRoller.rollD6(4);
+			Collections.sort(temp);
+			temp.remove(0);
+			list.add(temp.stream().mapToInt(Integer::intValue).sum());
+		}
+		return list;
+	}
+
+	public List<Integer> roll4d6DropLowestDieReroll1ForScores() {
+		List<Integer> list = new ArrayList<>();
+		for (int x = 0; x < 6; x++) {
 			List<Integer> temp = multiDiceRoller.rollD6(4);
 			Collections.sort(temp);
 			temp.remove(0);
