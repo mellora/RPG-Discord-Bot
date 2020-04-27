@@ -40,7 +40,7 @@ public class CommandManager {
 	public ICommand getCommand(String search) {
 		String searchLower = search.toLowerCase();
 		for (ICommand cmd : this.commands) {
-			if (cmd.getName().equals(searchLower) || cmd.getAliases().contains(searchLower)) {
+			if (cmd.getName().toLowerCase().equals(searchLower) || cmd.getAliases().contains(searchLower)) {
 				return cmd;
 			}
 		}
