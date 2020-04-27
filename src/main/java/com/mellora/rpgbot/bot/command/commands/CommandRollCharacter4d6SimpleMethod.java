@@ -40,7 +40,7 @@ public class CommandRollCharacter4d6SimpleMethod implements ICommand {
 
 	@Override
 	public String getHelp() {
-		return "Rolls  up 6 dice scores of 4 6-sided dice dropping the lowest die role for each\nUsage: "
+		return "Rolls 6 dice scores of 4 6-sided dice dropping the lowest die role for each\nUsage: "
 				+ Config.get("default_prefix") + this.getName();
 	}
 
