@@ -12,6 +12,7 @@ import com.mellora.rpgbot.bot.command.CommandContext;
 import com.mellora.rpgbot.bot.command.ICommand;
 import com.mellora.rpgbot.bot.command.commands.CommandRollCharacter4d6SimpleMethod;
 import com.mellora.rpgbot.bot.command.commands.CommandHelp;
+import com.mellora.rpgbot.bot.command.commands.CommandRollCharacter4d6AdvancedMethod;
 
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
@@ -22,6 +23,7 @@ public class CommandManager {
 	public CommandManager() {
 		addCommand(new CommandHelp(this));
 		addCommand(new CommandRollCharacter4d6SimpleMethod());
+		addCommand(new CommandRollCharacter4d6AdvancedMethod());
 	}
 
 	private void addCommand(ICommand cmd) {
