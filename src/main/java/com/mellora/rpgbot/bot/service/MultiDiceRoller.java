@@ -12,6 +12,7 @@ public class MultiDiceRoller {
 	}
 	
 	public List<Integer> rollD4(int numberOfDice) {
+		roller.newRandomSeed();
 		List<Integer> diceList = new ArrayList<>();
 		for (int x = 0; x < numberOfDice; x++) {
 			diceList.add(roller.rollD4());
@@ -20,6 +21,7 @@ public class MultiDiceRoller {
 	}
 	
 	public List<Integer> rollD6(int numberOfDice) {
+		roller.newRandomSeed();
 		List<Integer> diceList = new ArrayList<>();
 		for (int x = 0; x < numberOfDice; x++) {
 			diceList.add(roller.rollD6());
@@ -28,6 +30,7 @@ public class MultiDiceRoller {
 	}
 	
 	public List<Integer> rollD8(int numberOfDice) {
+		roller.newRandomSeed();
 		List<Integer> diceList = new ArrayList<>();
 		for (int x = 0; x < numberOfDice; x++) {
 			diceList.add(roller.rollD8());
@@ -36,6 +39,7 @@ public class MultiDiceRoller {
 	}
 	
 	public List<Integer> rollD10(int numberOfDice) {
+		roller.newRandomSeed();
 		List<Integer> diceList = new ArrayList<>();
 		for (int x = 0; x < numberOfDice; x++) {
 			diceList.add(roller.rollD10());
@@ -44,6 +48,7 @@ public class MultiDiceRoller {
 	}
 	
 	public List<Integer> rollD12(int numberOfDice) {
+		roller.newRandomSeed();
 		List<Integer> diceList = new ArrayList<>();
 		for (int x = 0; x < numberOfDice; x++) {
 			diceList.add(roller.rollD12());
@@ -52,6 +57,7 @@ public class MultiDiceRoller {
 	}
 	
 	public List<Integer> rollD20(int numberOfDice) {
+		roller.newRandomSeed();
 		List<Integer> diceList = new ArrayList<>();
 		for (int x = 0; x < numberOfDice; x++) {
 			diceList.add(roller.rollD20());
@@ -60,6 +66,7 @@ public class MultiDiceRoller {
 	}
 	
 	public List<Integer> rollD100(int numberOfDice) {
+		roller.newRandomSeed();
 		List<Integer> diceList = new ArrayList<>();
 		for (int x = 0; x < numberOfDice; x++) {
 			diceList.add(roller.rollD100());
