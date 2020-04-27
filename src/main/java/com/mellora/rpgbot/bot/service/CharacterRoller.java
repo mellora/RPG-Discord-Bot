@@ -6,7 +6,7 @@ import java.util.List;
 
 public class CharacterRoller {
 
-	MultiDiceRoller multiDiceRoller;
+	private MultiDiceRoller multiDiceRoller;
 	DiceRoller dieRoller;
 
 	public CharacterRoller() {
