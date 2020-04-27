@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class DiceRoller {
 
-	Random random;
+	private Random random;
 
 	public DiceRoller() {
 		random = new Random();
