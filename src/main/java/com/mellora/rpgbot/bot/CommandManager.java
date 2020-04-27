@@ -10,8 +10,8 @@ import javax.annotation.Nullable;
 import com.mellora.rpgbot.Config;
 import com.mellora.rpgbot.bot.command.CommandContext;
 import com.mellora.rpgbot.bot.command.ICommand;
-import com.mellora.rpgbot.bot.command.commands.SimpleCharacterRollerCommand;
-import com.mellora.rpgbot.bot.command.commands.HelpCommand;
+import com.mellora.rpgbot.bot.command.commands.CommandRollCharacter4d6SimpleMethod;
+import com.mellora.rpgbot.bot.command.commands.CommandHelp;
 
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
@@ -20,8 +20,8 @@ public class CommandManager {
 	private final List<ICommand> commands = new ArrayList<>(); // Look to use map instead
 
 	public CommandManager() {
-		addCommand(new HelpCommand(this));
-		addCommand(new SimpleCharacterRollerCommand());
+		addCommand(new CommandHelp(this));
+		addCommand(new CommandRollCharacter4d6SimpleMethod());
 	}
 
 	private void addCommand(ICommand cmd) {
