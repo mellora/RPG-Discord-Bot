@@ -13,6 +13,7 @@ public class CharacterRoller {
 	}
 
 	public List<Integer> roll4d6DropLowestDieForScores() {
+		multiDiceRoller.roller.newRandomSeed();
 		List<Integer> list = new ArrayList<>();
 		for (int x = 0; x < 6; x++) {
 			List<Integer> temp = multiDiceRoller.rollD6(4);
@@ -24,6 +25,7 @@ public class CharacterRoller {
 	}
 
 	public List<Integer> roll4d6DropLowestDieReroll1ForScores() {
+		multiDiceRoller.roller.newRandomSeed();
 		List<Integer> list = new ArrayList<>();
 		for (int x = 0; x < 6; x++) {
 			List<Integer> temp = multiDiceRoller.rollD6(4);
