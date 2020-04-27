@@ -7,11 +7,9 @@ import java.util.List;
 public class CharacterRoller {
 
 	private MultiDiceRoller multiDiceRoller;
-	DiceRoller dieRoller;
 
 	public CharacterRoller() {
 		multiDiceRoller = new MultiDiceRoller();
-		dieRoller = new DiceRoller();
 	}
 
 	public List<Integer> roll4d6DropLowestDieForScores() {
