@@ -7,6 +7,12 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 import com.mellora.rpgbot.bot.Bot;
 
+
+/*
+ * Main Class.
+ * created the ConfigurableApplicationContext as a public static to
+ * gracefully shutdown the program when a shutdown command is called.
+ */
 @SpringBootApplication
 public class DiscordJavaBotApplication {
 	

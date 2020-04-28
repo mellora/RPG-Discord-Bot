@@ -9,7 +9,10 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-
+/*
+ * This class reads the config.json file located in the resources folder
+ * and creates a static class reference to access config resources.
+ */
 public class Config {
 	// Create Resource Object from resources folder
 	private static final Resource res = new ClassPathResource("config/config.json");

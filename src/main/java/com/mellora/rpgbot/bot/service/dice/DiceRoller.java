@@ -4,16 +4,26 @@ import java.util.Random;
 
 public class DiceRoller {
 
+	// Creates a private random instance
 	private Random random;
 
 	public DiceRoller() {
+		// Initializes the random instance with a default seed based on current system time
+		
 		random = new Random();
 	}
 
+	// Method sets the random instance seed based on system time at method execution.
 	public void newRandomSeed() {
 		random.setSeed(System.currentTimeMillis());
 	}
 
+	/*
+	 * Following methods simulate the dice found in the typical RPG dice set.
+	 * Dice are listed as follows:
+	 * D4, D6, D8, D10, D12, D20, and D100.
+	 */
+	
 	public int rollD4() {
 		return random.nextInt(4) + 1;
 	}

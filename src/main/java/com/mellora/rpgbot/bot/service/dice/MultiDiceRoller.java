@@ -3,13 +3,24 @@ package com.mellora.rpgbot.bot.service.dice;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Class simulates rolling a number of dice based on input
+ */
 public class MultiDiceRoller {
 	
+	// Creates instance of DiceRoller class to be used within the Dice package
 	DiceRoller roller;
 	
 	public MultiDiceRoller(){
+		// Initializes the DiceRoller Instance.
 		roller = new DiceRoller();
 	}
+	
+	/*
+	 * Following Methods are for simulating rolling multiple dice grouped by die types.
+	 * Dice Types are the based on the RPG dice sets and are as follows:
+	 * D4, D6, D8, D10, D12, D20, and D100.
+	 */
 	
 	public List<Integer> rollD4(int numberOfDice) {
 		List<Integer> diceList = new ArrayList<>();

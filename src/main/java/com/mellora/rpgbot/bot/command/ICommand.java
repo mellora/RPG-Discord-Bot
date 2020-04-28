@@ -2,6 +2,7 @@ package com.mellora.rpgbot.bot.command;
 
 import java.util.List;
 
+// Interface to help control behavior of all commands created.
 public interface ICommand {
 	void handle(CommandContext ctx);
 	
