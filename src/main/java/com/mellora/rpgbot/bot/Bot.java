@@ -23,6 +23,12 @@ public class Bot {
 		String token = Config.get("token");
 
 		// Initializes the Bot using the token provided.
-		JDABuilder.createDefault(token).addEventListeners(new Listener()).setActivity(Activity.playing("With Your Lives")).build();
+		JDABuilder jda = JDABuilder.createDefault(token);
+		// Adds the Event Listener to handle guild events.
+		jda.addEventListeners(new Listener());
+		// Sets the activity of the bot in connected guilds when online.
+		jda.setActivity(Activity.playing("With Your Lives"));
+		// Builds the instance of the bot for application runtime.
+		jda.build();
 	}
 }
