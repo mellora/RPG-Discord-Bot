@@ -31,10 +31,13 @@ public class CharacterRoller {
 			List<Integer> temp = multiDiceRoller.rollD6(4);
 			System.out.println("List " + x + ": " + temp);
 			while (temp.contains(1)) {
-				Integer numberOfOnes = Collections.frequency(list, 1);
-				System.out.println(numberOfOnes);
-				List<Integer> newTemp = multiDiceRoller.rollD6(numberOfOnes);
-				System.out.println(newTemp);
+				int count = 0;
+				for(int num : temp) {
+					if(num == 1) {
+						count++;
+					}
+				}
+				List<Integer> newTemp = multiDiceRoller.rollD6(count);
 				temp.removeAll(Collections.singleton(1));
 				temp.addAll(newTemp);
 			}
