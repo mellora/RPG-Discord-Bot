@@ -12,8 +12,8 @@ import net.dv8tion.jda.api.EmbedBuilder;
 
 public class CommandRollCharacter4d6SimpleMethod implements ICommand {
 
-	CharacterRoller characterRoll;
-	EmbedBuilder eb;
+	private CharacterRoller characterRoll;
+	private EmbedBuilder eb;
 
 	// Method handles the command logic.
 	@Override
