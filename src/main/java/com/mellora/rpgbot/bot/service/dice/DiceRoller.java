@@ -1,4 +1,4 @@
-package com.mellora.rpgbot.bot.service;
+package com.mellora.rpgbot.bot.service.dice;
 
 import java.util.Random;
 

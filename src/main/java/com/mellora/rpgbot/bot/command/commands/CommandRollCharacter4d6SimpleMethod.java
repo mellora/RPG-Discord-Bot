@@ -6,7 +6,7 @@ import java.util.List;
 import com.mellora.rpgbot.Config;
 import com.mellora.rpgbot.bot.command.CommandContext;
 import com.mellora.rpgbot.bot.command.ICommand;
-import com.mellora.rpgbot.bot.service.CharacterRoller;
+import com.mellora.rpgbot.bot.service.dice.CharacterRoller;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 
