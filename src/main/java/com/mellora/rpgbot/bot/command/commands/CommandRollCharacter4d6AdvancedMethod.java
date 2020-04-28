@@ -33,7 +33,7 @@ public class CommandRollCharacter4d6AdvancedMethod implements ICommand {
 		// Sets the embed color.
 		eb.setColor(Color.PINK);
 
-		// Loops through all the rolls and add the roll score to an embed field.
+		// Loops through all the rolls and add the roll score to an embed field and adds it to the embed inline.
 		for (int x = 1; x <= rolls.size(); x++) {
 			eb.addField("Score " + x + ": ", rolls.get(x - 1).toString(), true);
 		}
