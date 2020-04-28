@@ -1,0 +1,9 @@
+logging:
+  level:
+    com:
+      mellora: debug
+    org:
+      springframework: error
+spring:
+  main:
+    banner-mode: 'off'
