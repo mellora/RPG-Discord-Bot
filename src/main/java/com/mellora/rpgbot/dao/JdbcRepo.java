@@ -13,7 +13,7 @@ public class JdbcRepo {
 
 	// Gets the pre-set methods from Spring Data JDBC.
 	@Autowired
-	private static JdbcTemplate jdbcTemplate;
+	public static JdbcTemplate jdbcTemplate;
 	
 	// Gets the information for a guild from the database.
 	public static GuildSettings findByGuildId(long guild_id) {
@@ -21,5 +21,9 @@ public class JdbcRepo {
 		return jdbcTemplate.queryForObject(sql, new Object[]{guild_id}, new BeanPropertyRowMapper<>(GuildSettings.class));
 	}
 	
-	
+	// Inserts guild into database.
+	public static int addGuild(long guild_id) {
+		String sql = "INSERT INTO guild_settings (guild_id) VALUES (?)";
+		return jdbcTemplate.update(sql, guild_id);
+	}
 }
