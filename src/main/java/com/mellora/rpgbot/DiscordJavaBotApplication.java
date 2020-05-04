@@ -18,8 +18,9 @@ public class DiscordJavaBotApplication {
 	
 	@Autowired
 	Bot bot;
-
+	
 	public static ConfigurableApplicationContext ctx;
+	
 	public static void main(String[] args) {
 		ctx = SpringApplication.run(DiscordJavaBotApplication.class, args);
 	}
