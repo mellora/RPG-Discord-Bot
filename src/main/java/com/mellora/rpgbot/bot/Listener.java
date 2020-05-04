@@ -1,16 +1,11 @@
 package com.mellora.rpgbot.bot;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import javax.annotation.Nonnull;
 
 import org.springframework.boot.SpringApplication;
 
 import com.mellora.rpgbot.Config;
 import com.mellora.rpgbot.DiscordJavaBotApplication;
-import com.mellora.rpgbot.dao.JdbcRepo;
 
 import lombok.extern.slf4j.Slf4j;
 import me.duncte123.botcommons.BotCommons;
@@ -81,24 +76,30 @@ public class Listener extends ListenerAdapter {
 			manager.handle(event);
 		}
 	}
-	
+
 	private String getPrefix(long guildId) {
-		try (final PreparedStatement preparedStatement = JdbcRepo.jdbcTemplate.getDataSource().getConnection().prepareStatement("SELECT prefix FROM guild_settings WHERE guild_id = ?")) {
-			preparedStatement.setString(1, String.valueOf(guildId));
-			try (final ResultSet resultSet = preparedStatement.executeQuery()){
-				if(resultSet.next()) {
-					System.out.println(resultSet.getString("prefix"));
-					return resultSet.getString("prefix");
-				}
-			}
-			try (final PreparedStatement insertStatement = JdbcRepo.jdbcTemplate.getDataSource().getConnection().prepareStatement("INSERT INTO guild_settings (guild_id) VALUES (?)")){
-				insertStatement.setString(1, String.valueOf(guildId));
-				insertStatement.execute();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		System.out.println(Config.get("default_prefix"));
+//		try (final PreparedStatement preparedStatement = JdbcRepo.jdbcTemplate.getDataSource().getConnection()
+//				.prepareStatement("SELECT prefix FROM guild_settings WHERE guild_id = ?")) {
+//			log.info("Test");
+//			preparedStatement.setString(1, String.valueOf(guildId));
+//			try (final ResultSet resultSet = preparedStatement.executeQuery()) {
+//				if (resultSet.next()) {
+//					System.out.println(resultSet.getString("prefix"));
+//					return resultSet.getString("prefix");
+//				}
+//			}
+//			try (final PreparedStatement insertStatement = JdbcRepo.jdbcTemplate.getDataSource().getConnection()
+//					.prepareStatement("INSERT INTO guild_settings (guild_id) VALUES (?)")) {
+//				insertStatement.setString(1, String.valueOf(guildId));
+//				insertStatement.execute();
+//			}
+//		} catch (SQLException e) {
+//			log.error("SQLException Caught:", e);
+//		} catch (NullPointerException e) {
+//			log.error("NullPointerException Caught:", e);
+//		}
+//		System.out.println(Config.get("default_prefix"));
+//		return Config.get("default_prefix");
 		return Config.get("default_prefix");
 	}
 }
