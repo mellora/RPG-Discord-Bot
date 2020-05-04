@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.mellora.rpgbot.Config;
 import com.mellora.rpgbot.dao.models.GuildSettings;
 
 /*
@@ -22,14 +23,14 @@ public class GuildSettingsRepo implements GuildSettingsDAO {
 	// Inserts guild into database.
 	@Override
 	public Integer save(Long guildId) {
-		String sql = "INSERT INTO guild_settings (guild_id) VALUES (?)";
-		return jdbcTemplate.update(sql, guildId);
+		String sql = "INSERT INTO guild_settings (guild_id, prefix) VALUES ( ? , ?)";
+		return jdbcTemplate.update(sql, guildId, Config.get("default_prefix"));
 	}
 
 	// Gets the information for a guild from the database.
 	@Override
 	public GuildSettings getByGuildId(Long guildId) {
-		String sql = "SELECT * FROM guild_settings WHERE guild_id=?";
+		String sql = "SELECT * FROM guild_settings WHERE guild_id = ? ";
 		return jdbcTemplate.queryForObject(sql, new Object[] { guildId },
 				new BeanPropertyRowMapper<>(GuildSettings.class));
 	}
