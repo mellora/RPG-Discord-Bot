@@ -11,6 +11,7 @@ public interface GuildSettingsDAO {
 
 	// Read
 	public GuildSettings getByGuildId(Long guildId);
+	public Boolean findIfGuildExists(Long guildId);
 
 	// Update
 	public Integer update(GuildSettings guildSettings);

@@ -39,6 +39,11 @@ public class GuildSettingsRepo  implements GuildSettingsDAO{
 	public GuildSettings getByGuildId(Long guildId) {
 		String sql = "SELECT * FROM guild_settings WHERE guild_id=?";
 		return jdbcTemplate.queryForObject(sql, new Object[]{guildId}, new BeanPropertyRowMapper<>(GuildSettings.class));
+	@Override
+	public Boolean findIfGuildExists(Long guildId) {
+		String sql = "SELECT COUNT(*) FROM guild_settings WHERE guild_id = ?";
+		int count = jdbcTemplate.queryForObject(sql, new Object[] { guildId }, Integer.class);
+		return count > 0;
 	}
 
 	@Override
