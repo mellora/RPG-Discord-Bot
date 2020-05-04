@@ -20,6 +20,10 @@ public class GuildSettingsRepo implements GuildSettingsDAO {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
+	public JdbcTemplate getTemplate() {
+		return jdbcTemplate;
+	}
+	
 	// Inserts guild into database.
 	@Override
 	public Integer save(Long guildId) {
