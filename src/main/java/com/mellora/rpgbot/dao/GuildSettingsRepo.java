@@ -30,7 +30,10 @@ public class GuildSettingsRepo implements GuildSettingsDAO {
 	@Override
 	public GuildSettings getByGuildId(Long guildId) {
 		String sql = "SELECT * FROM guild_settings WHERE guild_id=?";
-		return jdbcTemplate.queryForObject(sql, new Object[]{guildId}, new BeanPropertyRowMapper<>(GuildSettings.class));
+		return jdbcTemplate.queryForObject(sql, new Object[] { guildId },
+				new BeanPropertyRowMapper<>(GuildSettings.class));
+	}
+
 	@Override
 	public Boolean findIfGuildExists(Long guildId) {
 		String sql = "SELECT COUNT(*) FROM guild_settings WHERE guild_id = ?";
@@ -40,25 +43,18 @@ public class GuildSettingsRepo implements GuildSettingsDAO {
 
 	@Override
 	public Integer update(GuildSettings guildSettings) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public Integer deleteByGuildId(Long guildId) {
-		// TODO Auto-generated method stub
-		return 0;
+		String sql = "DELETE FROM guild_settings WHERE guild_id = ?";
+		return jdbcTemplate.update(sql, guildId);
 	}
 
 	@Override
 	public List<GuildSettings> getAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	public boolean findOutIfRecordExists(Long guildId) {
-		String sql = "SELECT COUNT(*) FROM guild_settings WHERE guild_id = ?";
-		int count = jdbcTemplate.queryForObject(sql, new Object[] {guildId}, Integer.class);
-		return count > 0;
+		String sql = "SELECT * FROM guild_settings";
+		return jdbcTemplate.query(sql, (rs, rowNum) ->new GuildSettings(rs.getInt("id"), rs.getLong("guild_id"), rs.getString("prefix")));
 	}
 }
