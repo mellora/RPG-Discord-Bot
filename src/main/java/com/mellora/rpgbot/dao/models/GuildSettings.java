@@ -8,12 +8,27 @@ import lombok.ToString;
 @Setter
 @ToString
 public class GuildSettings {
-
+	
 	private Integer id;
 	private Long guildId;
 	private String prefix;
-
+	
 	public GuildSettings() {
 		super();
+	}
+	
+	public GuildSettings(Long guildId) {
+		this.guildId = guildId;
+	}
+	
+	public GuildSettings(Long guildId, String prefix) {
+		this.guildId = guildId;
+		this.prefix = prefix;
+	}
+	
+	public GuildSettings(Integer id, Long guildId, String prefix) {
+		this.id = id;
+		this.guildId = guildId;
+		this.prefix = prefix;
 	}
 }
