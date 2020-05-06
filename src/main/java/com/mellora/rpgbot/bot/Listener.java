@@ -2,7 +2,6 @@ package com.mellora.rpgbot.bot;
 
 import javax.annotation.Nonnull;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 
 import com.mellora.rpgbot.Config;
@@ -22,10 +21,9 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
  */
 @Slf4j
 public class Listener extends ListenerAdapter {
-	
-	@Autowired
-	private GuildSettingsRepo repo;
 
+	private final GuildSettingsRepo repo = new GuildSettingsRepo();
+	
 	// Creates an instance of the manager class to handle commands.
 	private final CommandManager manager = new CommandManager();
 
@@ -53,7 +51,8 @@ public class Listener extends ListenerAdapter {
 
 		// Gets the prefix from config file
 //		String prefix = Config.get("default_prefix"); // Work on switching to database
-		String prefix = getPrefix(event.getGuild().getIdLong());
+		long guildId = event.getGuild().getIdLong();
+		String prefix = getPrefix(guildId);
 		// Gets the content of the event message
 		String raw = event.getMessage().getContentRaw();
 
@@ -105,6 +104,7 @@ public class Listener extends ListenerAdapter {
 //		}
 //		System.out.println(Config.get("default_prefix"));
 //		return Config.get("default_prefix");
+		System.out.println(repo.save(guildId));
 		return Config.get("default_prefix");
 	}
 }
