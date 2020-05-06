@@ -27,6 +27,7 @@ public class GuildSettingsRepo implements GuildSettingsDAO {
 		jdbcTemplate = new JdbcTemplate(dataSourceBuilder.build());
 	}
 
+	// Returns the template for special queries.
 	public JdbcTemplate getTemplate() {
 		return jdbcTemplate;
 	}
@@ -46,6 +47,7 @@ public class GuildSettingsRepo implements GuildSettingsDAO {
 				new BeanPropertyRowMapper<>(GuildSettings.class));
 	}
 
+	// Checks if Guild exists in the database.
 	@Override
 	public Boolean findIfGuildExists(Long guildId) {
 		String sql = "SELECT COUNT(*) FROM guild_settings WHERE guild_id = ?";
@@ -53,17 +55,20 @@ public class GuildSettingsRepo implements GuildSettingsDAO {
 		return count > 0;
 	}
 
+	// Updates the guild settings.
 	@Override
 	public Integer update(GuildSettings guildSettings) {
 		return 0;
 	}
 
+	// Deletes a guild from the database.
 	@Override
 	public Integer deleteByGuildId(Long guildId) {
 		String sql = "DELETE FROM guild_settings WHERE guild_id = ?";
 		return jdbcTemplate.update(sql, guildId);
 	}
 
+	// Returns all guilds from the database.
 	@Override
 	public List<GuildSettings> getAll() {
 		String sql = "SELECT * FROM guild_settings";
