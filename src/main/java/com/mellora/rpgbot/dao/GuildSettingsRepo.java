@@ -2,7 +2,7 @@ package com.mellora.rpgbot.dao;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -16,9 +16,16 @@ import com.mellora.rpgbot.dao.models.GuildSettings;
 @Repository
 public class GuildSettingsRepo implements GuildSettingsDAO {
 
-	// Spring Boot will create and configure DataSource and JdbcTemplate
-	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	public GuildSettingsRepo() {
+		DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
+		dataSourceBuilder.driverClassName(Config.get("driver_class"));
+		dataSourceBuilder.url(Config.get("url"));
+		dataSourceBuilder.username(Config.get("username"));
+		dataSourceBuilder.password(Config.get("password"));
+		jdbcTemplate = new JdbcTemplate(dataSourceBuilder.build());
+	}
 
 	public JdbcTemplate getTemplate() {
 		return jdbcTemplate;
