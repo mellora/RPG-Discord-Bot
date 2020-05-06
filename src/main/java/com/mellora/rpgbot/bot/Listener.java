@@ -82,29 +82,11 @@ public class Listener extends ListenerAdapter {
 	}
 
 	private String getPrefix(long guildId) {
-//		try (final PreparedStatement preparedStatement = JdbcRepo.jdbcTemplate.getDataSource().getConnection()
-//				.prepareStatement("SELECT prefix FROM guild_settings WHERE guild_id = ?")) {
-//			log.info("Test");
-//			preparedStatement.setString(1, String.valueOf(guildId));
-//			try (final ResultSet resultSet = preparedStatement.executeQuery()) {
-//				if (resultSet.next()) {
-//					System.out.println(resultSet.getString("prefix"));
-//					return resultSet.getString("prefix");
-//				}
-//			}
-//			try (final PreparedStatement insertStatement = JdbcRepo.jdbcTemplate.getDataSource().getConnection()
-//					.prepareStatement("INSERT INTO guild_settings (guild_id) VALUES (?)")) {
-//				insertStatement.setString(1, String.valueOf(guildId));
-//				insertStatement.execute();
-//			}
-//		} catch (SQLException e) {
-//			log.error("SQLException Caught:", e);
-//		} catch (NullPointerException e) {
-//			log.error("NullPointerException Caught:", e);
-//		}
-//		System.out.println(Config.get("default_prefix"));
-//		return Config.get("default_prefix");
-		System.out.println(repo.save(guildId));
-		return Config.get("default_prefix");
+		if(repo.findIfGuildExists(guildId)) {
+			return repo.getByGuildId(guildId).getPrefix();
+		}else {
+			repo.save(guildId);
+			return Config.get("default_prefix");
+		}
 	}
 }
