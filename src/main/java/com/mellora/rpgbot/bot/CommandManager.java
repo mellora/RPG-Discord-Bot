@@ -12,6 +12,7 @@ import com.mellora.rpgbot.bot.command.CommandContext;
 import com.mellora.rpgbot.bot.command.ICommand;
 import com.mellora.rpgbot.bot.command.commands.CommandRollCharacter4d6SimpleMethod;
 import com.mellora.rpgbot.dao.GuildSettingsRepo;
+import com.mellora.rpgbot.bot.command.commands.CommandChangePrefix;
 import com.mellora.rpgbot.bot.command.commands.CommandHelp;
 import com.mellora.rpgbot.bot.command.commands.CommandRollCharacter4d6AdvancedMethod;
 
@@ -32,6 +33,7 @@ public class CommandManager {
 		addCommand(new CommandHelp(this));
 		addCommand(new CommandRollCharacter4d6SimpleMethod());
 		addCommand(new CommandRollCharacter4d6AdvancedMethod());
+//		addCommand(new CommandChangePrefix(repo));
 	}
 
 	// Method to add a command to memory
