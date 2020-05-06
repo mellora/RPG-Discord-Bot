@@ -25,7 +25,7 @@ public class Listener extends ListenerAdapter {
 	private final GuildSettingsRepo repo = new GuildSettingsRepo();
 	
 	// Creates an instance of the manager class to handle commands.
-	private final CommandManager manager = new CommandManager();
+	private final CommandManager manager = new CommandManager(repo);
 
 	// Method prints to logger when the bot is ready on Discord.
 	@Override

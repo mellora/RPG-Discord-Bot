@@ -11,6 +11,7 @@ import com.mellora.rpgbot.Config;
 import com.mellora.rpgbot.bot.command.CommandContext;
 import com.mellora.rpgbot.bot.command.ICommand;
 import com.mellora.rpgbot.bot.command.commands.CommandRollCharacter4d6SimpleMethod;
+import com.mellora.rpgbot.dao.GuildSettingsRepo;
 import com.mellora.rpgbot.bot.command.commands.CommandHelp;
 import com.mellora.rpgbot.bot.command.commands.CommandRollCharacter4d6AdvancedMethod;
 
@@ -23,8 +24,11 @@ public class CommandManager {
 
 	// Holds implemented commands for use and handling in application
 	private final List<ICommand> commands = new ArrayList<>(); // Look to use map instead
+	
+//	private final GuildSettingsRepo repo;
 
-	public CommandManager() {
+	public CommandManager(GuildSettingsRepo repo) {
+//		this.repo = repo;
 		addCommand(new CommandHelp(this));
 		addCommand(new CommandRollCharacter4d6SimpleMethod());
 		addCommand(new CommandRollCharacter4d6AdvancedMethod());
