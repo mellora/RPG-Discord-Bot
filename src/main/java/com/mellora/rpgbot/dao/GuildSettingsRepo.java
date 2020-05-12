@@ -10,15 +10,18 @@ import org.springframework.stereotype.Repository;
 import com.mellora.rpgbot.Config;
 import com.mellora.rpgbot.dao.models.GuildSettings;
 
+import lombok.extern.slf4j.Slf4j;
 /*
  * Static class to facilitate communications to the database.
  */
+@Slf4j
 @Repository
 public class GuildSettingsRepo implements GuildSettingsDAO {
 
 	private JdbcTemplate jdbcTemplate;
 	
 	public GuildSettingsRepo() {
+		log.info("Database Initilized");
 		DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
 		dataSourceBuilder.driverClassName(Config.get("driver_class"));
 		dataSourceBuilder.url(Config.get("url"));
@@ -28,13 +31,16 @@ public class GuildSettingsRepo implements GuildSettingsDAO {
 	}
 
 	// Returns the template for special queries.
+	@Override
 	public JdbcTemplate getTemplate() {
+		log.info("Repo getTemplate Called");
 		return jdbcTemplate;
 	}
 	
 	// Inserts guild into database.
 	@Override
 	public Integer save(Long guildId) {
+		log.info("Repo save called");
 		String sql = "INSERT INTO guild_settings (guild_id, prefix) VALUES ( ? , ?)";
 		return jdbcTemplate.update(sql, guildId, Config.get("default_prefix"));
 	}
@@ -42,6 +48,7 @@ public class GuildSettingsRepo implements GuildSettingsDAO {
 	// Gets the information for a guild from the database.
 	@Override
 	public GuildSettings getByGuildId(Long guildId) {
+		log.info("Repo getGuildById called");
 		String sql = "SELECT * FROM guild_settings WHERE guild_id = ? ";
 		return jdbcTemplate.queryForObject(sql, new Object[] { guildId },
 				new BeanPropertyRowMapper<>(GuildSettings.class));
@@ -50,6 +57,7 @@ public class GuildSettingsRepo implements GuildSettingsDAO {
 	// Checks if Guild exists in the database.
 	@Override
 	public Boolean findIfGuildExists(Long guildId) {
+		log.info("Repo findIfGuildExists called");
 		String sql = "SELECT COUNT(*) FROM guild_settings WHERE guild_id = ?";
 		int count = jdbcTemplate.queryForObject(sql, new Object[] { guildId }, Integer.class);
 		return count > 0;
@@ -58,12 +66,14 @@ public class GuildSettingsRepo implements GuildSettingsDAO {
 	// Updates the guild settings.
 	@Override
 	public Integer update(GuildSettings guildSettings) {
+		log.info("Repo update called");
 		return 0;
 	}
 
 	// Deletes a guild from the database.
 	@Override
 	public Integer deleteByGuildId(Long guildId) {
+		log.info("Repo deleteByGuildId called");
 		String sql = "DELETE FROM guild_settings WHERE guild_id = ?";
 		return jdbcTemplate.update(sql, guildId);
 	}
@@ -71,6 +81,7 @@ public class GuildSettingsRepo implements GuildSettingsDAO {
 	// Returns all guilds from the database.
 	@Override
 	public List<GuildSettings> getAll() {
+		log.info("Repo getAll called");
 		String sql = "SELECT * FROM guild_settings";
 		return jdbcTemplate.query(sql, (rs, rowNum) ->new GuildSettings(rs.getInt("id"), rs.getLong("guild_id"), rs.getString("prefix")));
 	}
