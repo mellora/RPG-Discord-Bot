@@ -3,6 +3,7 @@ package com.mellora.rpgbot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import com.mellora.rpgbot.bot.Bot;
@@ -14,6 +15,7 @@ import com.mellora.rpgbot.bot.Bot;
  * gracefully shutdown the program when a shutdown command is called.
  */
 @SpringBootApplication
+@EnableCaching
 public class DiscordJavaBotApplication {
 	
 	@Autowired

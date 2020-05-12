@@ -3,6 +3,9 @@ package com.mellora.rpgbot.dao;
 import java.util.List;
 
 import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -11,6 +14,7 @@ import com.mellora.rpgbot.Config;
 import com.mellora.rpgbot.dao.models.GuildSettings;
 
 import lombok.extern.slf4j.Slf4j;
+
 /*
  * Static class to facilitate communications to the database.
  */
@@ -47,6 +51,7 @@ public class GuildSettingsRepo implements GuildSettingsDAO {
 
 	// Gets the information for a guild from the database.
 	@Override
+	@Cacheable(cacheNames = "guildSettings", key = "#guildId")
 	public GuildSettings getByGuildId(Long guildId) {
 		log.info("Repo getGuildById called");
 		String sql = "SELECT * FROM guild_settings WHERE guild_id = ? ";
@@ -65,6 +70,7 @@ public class GuildSettingsRepo implements GuildSettingsDAO {
 
 	// Updates the guild settings.
 	@Override
+	@CachePut(cacheNames = "guildSettings", key = "#guildSettings.id")
 	public Integer update(GuildSettings guildSettings) {
 		log.info("Repo update called");
 		return 0;
@@ -72,6 +78,7 @@ public class GuildSettingsRepo implements GuildSettingsDAO {
 
 	// Deletes a guild from the database.
 	@Override
+	@CacheEvict(cacheNames = "guildSettings", key = "#guildId")
 	public Integer deleteByGuildId(Long guildId) {
 		log.info("Repo deleteByGuildId called");
 		String sql = "DELETE FROM guild_settings WHERE guild_id = ?";
