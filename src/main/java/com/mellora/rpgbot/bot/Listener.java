@@ -2,11 +2,12 @@ package com.mellora.rpgbot.bot;
 
 import javax.annotation.Nonnull;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 
 import com.mellora.rpgbot.Config;
 import com.mellora.rpgbot.DiscordJavaBotApplication;
-import com.mellora.rpgbot.dao.GuildSettingsRepo;
+import com.mellora.rpgbot.dao.GuildSettingsRepository;
 
 import lombok.extern.slf4j.Slf4j;
 import me.duncte123.botcommons.BotCommons;
@@ -22,10 +23,11 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 @Slf4j
 public class Listener extends ListenerAdapter {
 
-	private final GuildSettingsRepo repo = new GuildSettingsRepo();
+	@Autowired
+	private GuildSettingsRepository repo;
 	
 	// Creates an instance of the manager class to handle commands.
-	private final CommandManager manager = new CommandManager(repo);
+	private final CommandManager manager = new CommandManager();
 
 	// Method prints to logger when the bot is ready on Discord.
 	@Override
@@ -82,11 +84,12 @@ public class Listener extends ListenerAdapter {
 	}
 
 	private String getPrefix(long guildId) {
-		if(repo.findIfGuildExists(guildId)) {
-			return repo.getByGuildId(guildId).getPrefix();
-		}else {
-			repo.save(guildId);
-			return Config.get("default_prefix");
-		}
+//		if(repo.findIfGuildExists(guildId)) {
+//			return repo.getByGuildId(guildId).getPrefix();
+//		}else {
+//			repo.save(new GuildSettings(guildId));
+//			return Config.get("default_prefix");
+//		}
+		return Config.get("default_prefix");
 	}
 }
