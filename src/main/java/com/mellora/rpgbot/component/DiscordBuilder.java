@@ -2,24 +2,20 @@ package com.mellora.rpgbot.component;
 
 import javax.annotation.PostConstruct;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.mellora.rpgbot.service.dice.DiceRoller;
-
 @Component
 public class DiscordBuilder {
-
-	@Autowired
-	DiceRoller roller;
+	
+	private String botToken;
 	
 	public DiscordBuilder(@Value("${discord.bot.token}") String botToken) {
-		
+		this.botToken = botToken;
 	}
 	
 	@PostConstruct
-	private void print() {
-		System.out.println(roller.rollD4());
+	private void setUp() {
+		System.out.println(botToken);
 	}
 }
