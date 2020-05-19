@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 
 import com.mellora.rpgbot.service.command.CommandContext;
 import com.mellora.rpgbot.service.command.ICommand;
+import com.mellora.rpgbot.service.command.commands.HelpCommand;
+import com.mellora.rpgbot.service.command.commands.RollCharacter4d6DropLowestCommand;
+import com.mellora.rpgbot.service.command.commands.RollCharacter4d6Reroll1DropLowestCommand;
 
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
@@ -28,6 +31,9 @@ public class CommandManager {
 	
 	public CommandManager(@Value("${discord.bot.prefix.default}") String prefix) {
 		this.prefix = prefix;
+		addCommand(new HelpCommand(this, prefix));
+		addCommand(new RollCharacter4d6DropLowestCommand(prefix));
+		addCommand(new RollCharacter4d6Reroll1DropLowestCommand(prefix));
 	}
 
 	// Method to add a command to memory
