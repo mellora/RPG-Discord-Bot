@@ -2,19 +2,25 @@ package com.mellora.rpgbot.service.dice;
 
 import java.util.Random;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DiceRoller {
 
 	// Creates a private random instance
-	@Autowired
 	private Random random;
+	
+	DiceRoller(){
+		random = new Random();
+	}
 
 	// Method sets the random instance seed based on system time at method execution.
 	public void newRandomSeed() {
 		random.setSeed(System.currentTimeMillis());
+	}
+	
+	public void setRandomSeed(Long seed) {
+		random.setSeed(seed);
 	}
 
 	/*
