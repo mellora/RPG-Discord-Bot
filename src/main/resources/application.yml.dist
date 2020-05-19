@@ -22,4 +22,5 @@ spring:
  discord:
   bot:
     token: ""
-    prefix: "!!"
+    prefix: 
+      default: "!!"
