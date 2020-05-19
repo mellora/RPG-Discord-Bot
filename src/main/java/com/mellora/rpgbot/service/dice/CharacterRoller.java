@@ -14,8 +14,12 @@ import org.springframework.stereotype.Service;
 public class CharacterRoller {
 
 	// Instances a private MultiDiceRoller.
-	@Autowired
 	private MultiDiceRoller multiDiceRoller;
+	
+	@Autowired
+	public CharacterRoller(MultiDiceRoller roller) {
+		this.multiDiceRoller = roller;
+	}
 
 	/*
 	 *  Simulates rolling 4 D6 and then removing the lowest roll.
