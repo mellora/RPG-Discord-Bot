@@ -48,7 +48,8 @@ public class Listener extends ListenerAdapter {
 		}
 
 		// Gets the prefix from application.yml file
-		String prefix = this.prefix; // Work on switching to database
+		long guildId = event.getGuild().getIdLong();
+		String prefix = getPrefix(guildId); // Work on switching to database
 		// Gets the content of the event message
 		String raw = event.getMessage().getContentRaw();
 
@@ -57,5 +58,9 @@ public class Listener extends ListenerAdapter {
 		if (raw.startsWith(prefix)) {
 			manager.handle(event);
 		}
+	}
+	
+	private String getPrefix(long guildId) {
+		return prefix;
 	}
 }
