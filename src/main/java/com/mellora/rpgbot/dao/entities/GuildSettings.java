@@ -1,4 +1,4 @@
-package com.mellora.rpgbot.dao;
+package com.mellora.rpgbot.dao.entities;
 
 import org.springframework.data.annotation.Id;
 
