@@ -16,10 +16,10 @@ import com.mellora.rpgbot.service.dice.MultiDiceRoller;
 
 class CharacterRollerTests {
 
-	private static final int numberOfTests = 5;
-	
+	private static final int numberOfTests = 10;
+
 	private static CharacterRoller roller;
-	
+
 	@BeforeAll
 	static void setUp() {
 		roller = new CharacterRoller(new MultiDiceRoller(new DiceRoller()));
@@ -28,13 +28,18 @@ class CharacterRollerTests {
 	@RepeatedTest(value = numberOfTests)
 	void testRoll4d6DropLowestDieForScores() {
 		List<Integer> stats = roller.roll4d6DropLowestDieForScores();
-		assertThat(stats.get(0), allOf(greaterThanOrEqualTo(3), lessThanOrEqualTo(18)));
+		for (Integer stat : stats) {
+			assertThat(stat, allOf(greaterThanOrEqualTo(3), lessThanOrEqualTo(18)));
+		}
 	}
 
 	@RepeatedTest(value = numberOfTests)
 	void testRoll4d6DropLowestDieReroll1ForScores() {
 		List<Integer> stats = roller.roll4d6DropLowestDieForScores();
-		assertThat(stats.get(0), allOf(greaterThanOrEqualTo(6), lessThanOrEqualTo(18)));
+		for (Integer stat : stats) {
+			assertThat(stat, allOf(greaterThanOrEqualTo(6), lessThanOrEqualTo(18)));
+		}
+
 	}
 
 }
