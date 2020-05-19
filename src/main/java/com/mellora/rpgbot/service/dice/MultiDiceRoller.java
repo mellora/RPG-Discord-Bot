@@ -13,8 +13,12 @@ import org.springframework.stereotype.Service;
 public class MultiDiceRoller {
 	
 	// Creates instance of DiceRoller class to be used within the Dice package
-	@Autowired
 	DiceRoller roller;
+	
+	@Autowired
+	public MultiDiceRoller(DiceRoller roller) {
+		this.roller = roller;
+	}
 	
 	/*
 	 * Following Methods are for simulating rolling multiple dice grouped by die types.
