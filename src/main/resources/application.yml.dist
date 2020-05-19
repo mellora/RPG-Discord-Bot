@@ -19,4 +19,7 @@ spring:
     url: jdbc:h2:mem:mellora 
     username: 
     password: 
- 
+ discord:
+  bot:
+    token: ""
+    prefix: "!!"
