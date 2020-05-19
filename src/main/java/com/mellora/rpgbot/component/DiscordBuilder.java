@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DiscordBuilder {
-	
+
 	public DiscordBuilder(@Value("${discord.bot.token}") String botToken) {
 		System.out.println(botToken);
 	}
