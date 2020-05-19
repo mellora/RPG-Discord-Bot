@@ -11,10 +11,10 @@ import com.mellora.rpgbot.service.dice.DiceRoller;
 
 class DiceRollerTests {
 
+	private static final int numberOfTests = 5;
+	
 	private static DiceRoller roller = new DiceRoller();
 	
-	private static final int numberOfTests = 5;
-
 	@RepeatedTest(value = numberOfTests)
 	void testRollD4() {
 		int roll = roller.rollD4();
