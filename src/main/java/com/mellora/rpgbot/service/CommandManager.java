@@ -27,7 +27,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 public class CommandManager {
 
 	// Holds implemented commands for use and handling in application
-	private final List<ICommand> commands = new ArrayList<>(); // Look to use map instead
+	private final List<ICommand> commands = new ArrayList<>();
 	
 	private String prefix;
 	
