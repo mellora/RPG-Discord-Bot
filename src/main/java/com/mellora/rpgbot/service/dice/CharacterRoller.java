@@ -1,19 +1,24 @@
-package com.mellora.rpgbot.bot.service.dice;
+package com.mellora.rpgbot.service.dice;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 /*
  * Class simulates popular ways to roll up character scores in D&D 5E
  */
+@Service
 public class CharacterRoller {
 
 	// Instances a private MultiDiceRoller.
 	private MultiDiceRoller multiDiceRoller;
-
-	public CharacterRoller() {
-		multiDiceRoller = new MultiDiceRoller();
+	
+	@Autowired
+	public CharacterRoller(MultiDiceRoller roller) {
+		this.multiDiceRoller = roller;
 	}
 
 	/*

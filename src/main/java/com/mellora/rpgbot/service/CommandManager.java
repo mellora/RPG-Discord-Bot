@@ -1,4 +1,4 @@
-package com.mellora.rpgbot.bot;
+package com.mellora.rpgbot.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,34 +6,48 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
+import javax.annotation.PostConstruct;
 
-import com.mellora.rpgbot.Config;
-import com.mellora.rpgbot.bot.command.CommandContext;
-import com.mellora.rpgbot.bot.command.ICommand;
-import com.mellora.rpgbot.bot.command.commands.CommandRollCharacter4d6SimpleMethod;
-import com.mellora.rpgbot.dao.GuildSettingsRepo;
-import com.mellora.rpgbot.bot.command.commands.CommandChangePrefix;
-import com.mellora.rpgbot.bot.command.commands.CommandHelp;
-import com.mellora.rpgbot.bot.command.commands.CommandRollCharacter4d6AdvancedMethod;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import com.mellora.rpgbot.service.command.CommandContext;
+import com.mellora.rpgbot.service.command.ICommand;
+import com.mellora.rpgbot.service.command.commands.HelpCommand;
+import com.mellora.rpgbot.service.command.commands.RollCharacter4d6DropLowestCommand;
+import com.mellora.rpgbot.service.command.commands.RollCharacter4d6Reroll1DropLowestCommand;
 
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 /*
  * Class handles command registration and handles events sent by the listiner class.
  */
+@Service
 public class CommandManager {
 
 	// Holds implemented commands for use and handling in application
 	private final List<ICommand> commands = new ArrayList<>(); // Look to use map instead
 	
-//	private final GuildSettingsRepo repo;
-
-	public CommandManager(GuildSettingsRepo repo) {
-//		this.repo = repo;
-		addCommand(new CommandHelp(this));
-		addCommand(new CommandRollCharacter4d6SimpleMethod());
-		addCommand(new CommandRollCharacter4d6AdvancedMethod());
-//		addCommand(new CommandChangePrefix(repo));
+	private String prefix;
+	
+	@Autowired
+	private HelpCommand help;
+	@Autowired
+	private RollCharacter4d6DropLowestCommand roll4d6Drop1;
+	@Autowired
+	private RollCharacter4d6Reroll1DropLowestCommand roll4d6Reroll1Drop1;
+	
+	public CommandManager(@Value("${discord.bot.prefix.default}") String prefix) {
+		this.prefix = prefix;
+	}
+	
+	@PostConstruct
+	private void setUp() {
+		help.setManager(this);
+		addCommand(help);
+		addCommand(roll4d6Drop1);
+		addCommand(roll4d6Reroll1Drop1);
 	}
 
 	// Method to add a command to memory
@@ -69,7 +83,7 @@ public class CommandManager {
 	void handle(GuildMessageReceivedEvent event) {
 		// Gets command message and cleans it up.
 		String[] split = event.getMessage().getContentRaw()
-				.replaceFirst("(?i)" + Pattern.quote(Config.get("default_prefix")), "").split("\\s+");
+				.replaceFirst("(?i)" + Pattern.quote(prefix), "").split("\\s+");
 		String invoke = split[0].toLowerCase();
 		// Creates the command context using the getCommand method. Null if no command found
 		ICommand cmd = this.getCommand(invoke);

@@ -1,19 +1,23 @@
-package com.mellora.rpgbot.bot.service.dice;
+package com.mellora.rpgbot.service.dice;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 /*
  * Class simulates rolling a number of dice based on input
  */
+@Service
 public class MultiDiceRoller {
 	
 	// Creates instance of DiceRoller class to be used within the Dice package
 	DiceRoller roller;
 	
-	public MultiDiceRoller(){
-		// Initializes the DiceRoller Instance.
-		roller = new DiceRoller();
+	@Autowired
+	public MultiDiceRoller(DiceRoller roller) {
+		this.roller = roller;
 	}
 	
 	/*
