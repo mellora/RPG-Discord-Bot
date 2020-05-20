@@ -2,6 +2,7 @@ package com.mellora.rpgbot.service.command.commands;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.mellora.rpgbot.service.CommandManager;
@@ -13,12 +14,17 @@ import net.dv8tion.jda.api.entities.TextChannel;
 @Service
 public class HelpCommand implements ICommand {
 
-	private final CommandManager manager;
-	private final String prefix;
+	private CommandManager manager;
 	
-	public HelpCommand(CommandManager manager, String prefix) {
+	@Value("${discord.bot.prefix.default}")
+	private String prefix;
+	
+//	public HelpCommand(CommandManager manager) {
+//		this.manager = manager;
+//	}
+	
+	public void setManager(CommandManager manager) {
 		this.manager = manager;
-		this.prefix = prefix;
 	}
 
 	// Method handles the command logic.
@@ -71,5 +77,6 @@ public class HelpCommand implements ICommand {
 	public List<String> getAliases() {
 		return List.of("commands", "cmds", "commandlist");
 	}
+
 
 }
