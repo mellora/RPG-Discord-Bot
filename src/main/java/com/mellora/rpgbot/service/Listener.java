@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.mellora.rpgbot.dao.GuildSettingsRepository;
+import com.mellora.rpgbot.dao.entities.GuildSettings;
+
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.ReadyEvent;
@@ -18,6 +21,9 @@ public class Listener extends ListenerAdapter {
 	// Creates an instance of the manager class to handle commands.
 	@Autowired
 	private  CommandManager manager;
+	
+	@Autowired
+	private GuildSettingsRepository repo;
 	
 	private String prefix;
 	
@@ -61,6 +67,12 @@ public class Listener extends ListenerAdapter {
 	}
 	
 	private String getPrefix(long guildId) {
-		return prefix;
+		GuildSettings guild = repo.getGuildByGuildId(guildId);
+		if(guild != null) {
+			return guild.getPrefix();
+		}else {
+			repo.save(new GuildSettings());
+			return prefix;
+		}
 	}
 }

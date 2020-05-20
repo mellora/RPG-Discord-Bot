@@ -10,6 +10,6 @@ import com.mellora.rpgbot.dao.entities.GuildSettings;
 @Repository
 public interface GuildSettingsRepository extends CrudRepository<GuildSettings, Integer>{
 
-	@Query(value = "SELECT * FROM guild_setting WHERE guild_id = :guild_id")
+	@Query(value = "SELECT * FROM guild_settings WHERE guild_id = :guild_id")
 	GuildSettings getGuildByGuildId(@Param(value = "guild_id") Long guildId);
 }
