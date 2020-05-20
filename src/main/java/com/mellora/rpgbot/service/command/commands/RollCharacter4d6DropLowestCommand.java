@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import com.mellora.rpgbot.service.command.CommandContext;
 import com.mellora.rpgbot.service.command.ICommand;
@@ -12,6 +13,7 @@ import com.mellora.rpgbot.service.dice.CharacterRoller;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 
+@Service
 public class RollCharacter4d6DropLowestCommand implements ICommand {
 
 	@Autowired
