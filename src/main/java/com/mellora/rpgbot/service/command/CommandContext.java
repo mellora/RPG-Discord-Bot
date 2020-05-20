@@ -1,4 +1,4 @@
-package com.mellora.rpgbot.bot.command;
+package com.mellora.rpgbot.service.command;
 
 import java.util.List;
 

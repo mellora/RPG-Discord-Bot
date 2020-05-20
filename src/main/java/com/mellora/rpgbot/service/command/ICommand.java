@@ -1,8 +1,8 @@
-package com.mellora.rpgbot.bot.command;
+package com.mellora.rpgbot.service.command;
 
 import java.util.List;
 
-// Interface to help control behavior of all commands created.
+//Interface to help control behavior of all commands created.
 public interface ICommand {
 	void handle(CommandContext ctx);
 	

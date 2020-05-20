@@ -1,29 +1,36 @@
-package com.mellora.rpgbot.bot.command.commands;
+package com.mellora.rpgbot.service.command.commands;
 
 import java.util.List;
 
-import com.mellora.rpgbot.Config;
-import com.mellora.rpgbot.bot.CommandManager;
-import com.mellora.rpgbot.bot.command.CommandContext;
-import com.mellora.rpgbot.bot.command.ICommand;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import com.mellora.rpgbot.service.CommandManager;
+import com.mellora.rpgbot.service.command.CommandContext;
+import com.mellora.rpgbot.service.command.ICommand;
 
 import net.dv8tion.jda.api.entities.TextChannel;
 
-/*
- * Command class for Help command.
- */
-public class CommandHelp implements ICommand {
+@Service
+public class HelpCommand implements ICommand {
 
-	private final CommandManager manager;
-
-	public CommandHelp(CommandManager manager) {
+	private CommandManager manager;
+	
+	@Value("${discord.bot.prefix.default}")
+	private String prefix;
+	
+//	public HelpCommand(CommandManager manager) {
+//		this.manager = manager;
+//	}
+	
+	public void setManager(CommandManager manager) {
 		this.manager = manager;
 	}
 
 	// Method handles the command logic.
 	@Override
 	public void handle(CommandContext ctx) {
-		
+
 		// Gets needed values from Command Context.
 		List<String> args = ctx.getArgs();
 		TextChannel channel = ctx.getChannel();
@@ -33,7 +40,7 @@ public class CommandHelp implements ICommand {
 			StringBuilder builder = new StringBuilder();
 			builder.append("List of commands\n");
 			manager.getCommands().stream().map(ICommand::getName)
-					.forEach((it) -> builder.append("`").append(Config.get("default_prefix")).append(it).append("`\n"));
+					.forEach((it) -> builder.append("`").append(prefix).append(it).append("`\n"));
 			channel.sendMessage(builder.toString()).queue();
 			return;
 		}
@@ -61,7 +68,7 @@ public class CommandHelp implements ICommand {
 	// Method returns the commands help context.
 	@Override
 	public String getHelp() {
-		return "Shows the list with commands in the bot\nUsage: " + Config.get("default_prefix") + this.getName()
+		return "Shows the list with commands in the bot\nUsage: " + prefix + this.getName()
 				+ " [command]";
 	}
 
@@ -70,4 +77,6 @@ public class CommandHelp implements ICommand {
 	public List<String> getAliases() {
 		return List.of("commands", "cmds", "commandlist");
 	}
+
+
 }

@@ -1,15 +1,16 @@
-package com.mellora.rpgbot.bot.service.dice;
+package com.mellora.rpgbot.service.dice;
 
 import java.util.Random;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class DiceRoller {
 
 	// Creates a private random instance
 	private Random random;
-
-	public DiceRoller() {
-		// Initializes the random instance with a default seed based on current system time
-		
+	
+	public DiceRoller(){
 		random = new Random();
 	}
 
