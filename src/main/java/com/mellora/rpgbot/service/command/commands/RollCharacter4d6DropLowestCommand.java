@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import com.mellora.rpgbot.service.command.CommandContext;
 import com.mellora.rpgbot.service.command.ICommand;
@@ -15,13 +16,11 @@ public class RollCharacter4d6DropLowestCommand implements ICommand {
 
 	@Autowired
 	private CharacterRoller characterRoll;
+	
 	private EmbedBuilder eb;
 	
-	private final String prefix;
-
-	public RollCharacter4d6DropLowestCommand(String prefix) {
-		this.prefix = prefix;
-	}
+	@Value("${discord.bot.prefix.default}")
+	private String prefix;
 
 	// Method handles the command logic.
 	@Override
