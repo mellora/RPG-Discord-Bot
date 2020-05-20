@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
+import javax.annotation.PostConstruct;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -26,14 +28,26 @@ public class CommandManager {
 
 	// Holds implemented commands for use and handling in application
 	private final List<ICommand> commands = new ArrayList<>(); // Look to use map instead
-
+	
 	private String prefix;
+	
+	@Autowired
+	private HelpCommand help;
+	@Autowired
+	private RollCharacter4d6DropLowestCommand roll4d6Drop1;
+	@Autowired
+	private RollCharacter4d6Reroll1DropLowestCommand roll4d6Reroll1Drop1;
 	
 	public CommandManager(@Value("${discord.bot.prefix.default}") String prefix) {
 		this.prefix = prefix;
-		addCommand(new HelpCommand(this, prefix));
-		addCommand(new RollCharacter4d6DropLowestCommand(prefix));
-		addCommand(new RollCharacter4d6Reroll1DropLowestCommand(prefix));
+	}
+	
+	@PostConstruct
+	private void setUp() {
+		help.setManager(this);
+		addCommand(help);
+		addCommand(roll4d6Drop1);
+		addCommand(roll4d6Reroll1Drop1);
 	}
 
 	// Method to add a command to memory
