@@ -20,13 +20,13 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class Listener extends ListenerAdapter {
 	// Creates an instance of the manager class to handle commands.
 	@Autowired
-	private  CommandManager manager;
-	
+	private CommandManager manager;
+
 	@Autowired
 	private GuildSettingsRepository repo;
-	
+
 	private String prefix;
-	
+
 	public Listener(@Value("${discord.bot.prefix.default}") String prefix) {
 		this.prefix = prefix;
 	}
@@ -65,13 +65,13 @@ public class Listener extends ListenerAdapter {
 			manager.handle(event);
 		}
 	}
-	
+
 	private String getPrefix(long guildId) {
 		GuildSettings guild = repo.getGuildByGuildId(guildId);
-		if(guild != null) {
+		if (guild != null) {
 			return guild.getPrefix();
-		}else {
-			repo.save(new GuildSettings());
+		} else {
+			repo.save(new GuildSettings(null, guildId, prefix));
 			return prefix;
 		}
 	}
