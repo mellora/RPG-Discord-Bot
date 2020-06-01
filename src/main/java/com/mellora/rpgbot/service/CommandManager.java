@@ -9,14 +9,15 @@ import javax.annotation.Nullable;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.mellora.rpgbot.dao.GuildSettingsRepository;
 import com.mellora.rpgbot.service.command.CommandContext;
 import com.mellora.rpgbot.service.command.ICommand;
 import com.mellora.rpgbot.service.command.commands.HelpCommand;
 import com.mellora.rpgbot.service.command.commands.RollCharacter4d6DropLowestCommand;
 import com.mellora.rpgbot.service.command.commands.RollCharacter4d6Reroll1DropLowestCommand;
+import com.mellora.rpgbot.service.command.commands.SetPrefixCommand;
 
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
@@ -26,10 +27,11 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 @Service
 public class CommandManager {
 
+	@Autowired
+	private GuildSettingsRepository repo;
+	
 	// Holds implemented commands for use and handling in application
 	private final List<ICommand> commands = new ArrayList<>();
-	
-	private String prefix;
 	
 	@Autowired
 	private HelpCommand help;
@@ -37,10 +39,8 @@ public class CommandManager {
 	private RollCharacter4d6DropLowestCommand roll4d6Drop1;
 	@Autowired
 	private RollCharacter4d6Reroll1DropLowestCommand roll4d6Reroll1Drop1;
-	
-	public CommandManager(@Value("${discord.bot.prefix.default}") String prefix) {
-		this.prefix = prefix;
-	}
+	@Autowired
+	private SetPrefixCommand setPrefix;
 	
 	@PostConstruct
 	private void setUp() {
@@ -48,6 +48,7 @@ public class CommandManager {
 		addCommand(help);
 		addCommand(roll4d6Drop1);
 		addCommand(roll4d6Reroll1Drop1);
+		addCommand(setPrefix);
 	}
 
 	// Method to add a command to memory
@@ -81,6 +82,7 @@ public class CommandManager {
 
 	// Method to handle commands.
 	void handle(GuildMessageReceivedEvent event) {
+		String prefix = repo.getGuildByGuildId(event.getGuild().getIdLong()).getPrefix();
 		// Gets command message and cleans it up.
 		String[] split = event.getMessage().getContentRaw()
 				.replaceFirst("(?i)" + Pattern.quote(prefix), "").split("\\s+");
