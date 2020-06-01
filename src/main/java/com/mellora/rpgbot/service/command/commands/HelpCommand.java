@@ -2,9 +2,11 @@ package com.mellora.rpgbot.service.command.commands;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mellora.rpgbot.dao.GuildSettingsRepository;
+import com.mellora.rpgbot.dao.entities.GuildSettings;
 import com.mellora.rpgbot.service.CommandManager;
 import com.mellora.rpgbot.service.command.CommandContext;
 import com.mellora.rpgbot.service.command.ICommand;
@@ -16,12 +18,8 @@ public class HelpCommand implements ICommand {
 
 	private CommandManager manager;
 	
-	@Value("${discord.bot.prefix.default}")
-	private String prefix;
-	
-//	public HelpCommand(CommandManager manager) {
-//		this.manager = manager;
-//	}
+	@Autowired
+	private GuildSettingsRepository repo;
 	
 	public void setManager(CommandManager manager) {
 		this.manager = manager;
@@ -34,13 +32,15 @@ public class HelpCommand implements ICommand {
 		// Gets needed values from Command Context.
 		List<String> args = ctx.getArgs();
 		TextChannel channel = ctx.getChannel();
+		
+		GuildSettings guild = repo.getGuildByGuildId(ctx.getGuild().getIdLong());
 
 		// Checks if args is empty and outputs all command names to guild if empty.
 		if (args.isEmpty()) {
 			StringBuilder builder = new StringBuilder();
 			builder.append("List of commands\n");
 			manager.getCommands().stream().map(ICommand::getName)
-					.forEach((it) -> builder.append("`").append(prefix).append(it).append("`\n"));
+					.forEach((it) -> builder.append("`").append(guild.getPrefix()).append(it).append("`\n"));
 			channel.sendMessage(builder.toString()).queue();
 			return;
 		}
@@ -56,7 +56,7 @@ public class HelpCommand implements ICommand {
 		}
 
 		// Sends the help context for searched for command.
-		channel.sendMessage(command.getHelp()).queue();
+		channel.sendMessage(command.getHelp(guild)).queue();
 	}
 
 	// Method returns the command name for Discord.
@@ -67,8 +67,8 @@ public class HelpCommand implements ICommand {
 
 	// Method returns the commands help context.
 	@Override
-	public String getHelp() {
-		return "Shows the list with commands in the bot\nUsage: " + prefix + this.getName()
+	public String getHelp(GuildSettings guild) {
+		return "Shows the list with commands in the bot\nUsage: " + guild.getPrefix() + this.getName()
 				+ " [command]";
 	}
 
