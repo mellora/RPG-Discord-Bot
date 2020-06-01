@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mellora.rpgbot.dao.GuildSettingsRepository;
+import com.mellora.rpgbot.dao.entities.GuildSettings;
 import com.mellora.rpgbot.service.command.CommandContext;
 import com.mellora.rpgbot.service.command.ICommand;
 
@@ -27,6 +28,8 @@ public class SetPrefixCommand implements ICommand {
 		final TextChannel channel = ctx.getChannel();
 		final List<String> args = ctx.getArgs();
 		final Member member = ctx.getMember();
+
+		final GuildSettings guild = repo.getGuildByGuildId(ctx.getGuild().getIdLong());
 		
 		if(!member.hasPermission(Permission.MANAGE_SERVER)) {
 			channel.sendMessage("You do not have the power to manage this server.").queue();
@@ -39,6 +42,9 @@ public class SetPrefixCommand implements ICommand {
 		}
 		
 		final String newPrefix = String.join("", args);
+		
+		guild.setPrefix(newPrefix);
+		repo.save(guild);
 		
 		channel.sendMessageFormat("New prefix has been set to `%s`", newPrefix);
 
