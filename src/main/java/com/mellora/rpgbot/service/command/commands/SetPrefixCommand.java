@@ -20,8 +20,6 @@ public class SetPrefixCommand implements ICommand {
 	@Autowired
 	private GuildSettingsRepository repo;
 	
-	private String prefix;
-	
 	@Override
 	public void handle(CommandContext ctx) {
 		
@@ -56,8 +54,8 @@ public class SetPrefixCommand implements ICommand {
 	}
 
 	@Override
-	public String getHelp() {
-		return "Sets the prefix for this server.\nUsage: " + prefix + this.getName()
+	public String getHelp(GuildSettings guild) {
+		return "Sets the prefix for this server.\nUsage: " + guild.getPrefix() + this.getName()
 		+ " <prefix>";
 	}
 

@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.mellora.rpgbot.dao.entities.GuildSettings;
 import com.mellora.rpgbot.service.command.CommandContext;
 import com.mellora.rpgbot.service.command.ICommand;
 import com.mellora.rpgbot.service.dice.CharacterRoller;
@@ -20,9 +20,6 @@ public class RollCharacter4d6DropLowestCommand implements ICommand {
 	private CharacterRoller characterRoll;
 	
 	private EmbedBuilder eb;
-	
-	@Value("${discord.bot.prefix.default}")
-	private String prefix;
 
 	// Method handles the command logic.
 	@Override
@@ -58,8 +55,8 @@ public class RollCharacter4d6DropLowestCommand implements ICommand {
 
 	// Method returns the commands help context.
 	@Override
-	public String getHelp() {
+	public String getHelp(GuildSettings guild) {
 		return "Rolls 6 dice scores of 4 6-sided dice dropping the lowest die role for each\nUsage: "
-				+ prefix + this.getName();
+				+ guild.getPrefix() + this.getName();
 	}
 }
