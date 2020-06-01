@@ -12,7 +12,5 @@ public interface GuildSettingsRepository extends CrudRepository<GuildSettings, I
 
 	@Query(value = "SELECT * FROM guild_settings WHERE guild_id = :guild_id")
 	GuildSettings getGuildByGuildId(@Param(value = "guild_id") Long guildId);
-	
-	@Query(value = "UPDATE guild_settings SET prefix = :prefix WHERE guild_id = :guild_id")
-	Integer updatePrefix(@Param(value = "prefix") String prefix, @Param(value = "guild_id") Long guildId);
+
 }
